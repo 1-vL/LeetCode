@@ -8,7 +8,7 @@ class Solution {
             } else {
                 k++;
             }
-            if (nums[i] == nums[i-1] && nums[i] != 10001) {
+            if (nums[i] != 10001 && nums[i] == nums[i-1]) {
                 pre = nums[i];
             }
         }
