@@ -1,18 +1,19 @@
 class Solution {
     public int majorityElement(int[] nums) {
-        int len = nums.length;
-        int pos = 0;
-        Arrays.sort(nums);
+        int n = nums.length;
+        Map<Integer, Integer> map = new HashMap<>();
         
-        for (int i=1;i<len;i++) {
-            if (nums[i]!=nums[i-1]) {
-                // 서로 다른 숫자 경계지점
-                if ((i-pos)>=len/2+1) {
-                    return nums[i-1];
-                }
-                pos = i-1;
+        for (int i = 0; i < n; i++) {
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
+        }
+        
+        n = n / 2;
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (entry.getValue() > n) {
+                return entry.getKey();
             }
         }
-        return nums[len-1];
+        
+        return 0;
     }
 }
