@@ -1,8 +1,11 @@
 class Solution {
     public int removeDuplicates(int[] nums) {
-        int[] tempnums = Arrays.stream(nums).distinct().toArray();
-        int k = tempnums.length;
-        System.arraycopy(tempnums, 0, nums, 0, k);
-        return k;
+        int k = 0;
+        for (int i=0;i<nums.length;i++) {            
+            if (nums[k]!=nums[i]) {
+                nums[++k]=nums[i];
+            }
+        }
+        return k+1;
     }
 }
