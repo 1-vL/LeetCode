@@ -4,10 +4,11 @@ class Solution {
         HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
         
         for (int i=0;i<nums.length;i++) {
-            if (majority <= map.getOrDefault(nums[i],0)) {
+            int value = map.getOrDefault(nums[i],0);
+            if (majority <= value) {
                 return nums[i];
             }
-            map.put(nums[i],map.getOrDefault(nums[i],0)+1);
+            map.put(nums[i],value+1);
         }
         return -1;
     }
