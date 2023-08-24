@@ -1,40 +1,18 @@
 class Solution {
     public int maxProfit(int[] prices) {
-        int max_profit = 0;
-        int max = -1;
-        int min = Integer.MAX_VALUE;
-        int max_pos = 0;
-        int min_pos = 0;
+        int lsf = Integer.MAX_VALUE; // least so far
+        int op = 0; // overall profit
+        int pist = 0; // profit if sold today
         
-        int real_min = Integer.MAX_VALUE;
-        int real_max = -1;
-        // 배열 내부의 최대값과 최소값 찾기
-        for (int i=0;i<prices.length;i++) {
-            real_min = Math.min(real_min, prices[i]);
-            real_max = Math.max(real_max, prices[i]);
-        }
-        int real_max_profit = real_max-real_min;
-        
-        for (int i=0;i<prices.length;i++) {
-            int now = prices[i];
-            // 최고가 갱신
-            if (now > max) {
-                max_pos = i;
-                max = now;
+        for(int i = 0; i < prices.length; i++){
+            if(prices[i] < lsf){ // if we found new buy value which is more smaller then previous one
+                lsf = prices[i]; // update our least so far
             }
-            // 차익 계산
-            max_profit = Math.max(max_profit, max-min);
-            if (real_max_profit == max_profit) {
-                return real_max_profit;
-            }
-            // 새로운 최저가 -> 이전 최고가 사용할 의미 없어지므로 초기화
-            if (now < min) {
-                min_pos = i;
-                min = now;
-                max_pos = i;
-                max = now;
+            pist = prices[i] - lsf; // calculating profit if sold today by, Buy - sell
+            if(op < pist){ // if pist is more then our previous overall profit
+                op = pist; // update overall profit
             }
         }
-        return max_profit;
+        return op; // return op 
     }
 }
