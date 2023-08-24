@@ -8,9 +8,9 @@ class Solution {
         for (int i=0;i<nums.length-1;i++) {
             if (possible >= i) {
                 possible = Math.max(nums[i]+i, possible);
-            }
-            if (possible >= nums.length-1) {
-                return true;
+                if (possible >= nums.length-1) {
+                    return true;
+                }
             }
         }
         return false;
