@@ -27,7 +27,7 @@ class Solution {
         for (int i=0;i<s.length();i++) {            
             char c = s.charAt(i);
             // 숫자 또는 알파벳 소문자만
-            if ((c >= 48 && c <= 57) || (c >= 97 && c <= 122)) {
+            if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z')) {
                 sb.append(c);
             }
         }
