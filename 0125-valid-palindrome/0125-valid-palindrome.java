@@ -1,38 +1,54 @@
 
 class Solution {
     public boolean isPalindrome(String s) {
-        // 문자만 남기기
-        s = trim(s);
+        // char 배열 가져오기
+        char[] array = s.toCharArray();
         
-        // 빈 문자열인 경우 true
-        if (s.length() == 0) {
-            return true;
-        }
+        // 앞 포인터 i, 뒤 포인터 j
+        int i = 0;
+        int j = s.length()-1;
         
-        // 투포인터로 비교후 다른 경우 즉시 false 리턴
-        for (int i=0;i<s.length()/2;i++) {
-            if (s.charAt(i) != s.charAt(s.length()-1-i)) {
-               return false; 
+        // char 배열 정리
+        while (i <=j) {
+            if (isUpper(array[i])) {
+                array[i] = toLowerCase(array[i]);
             }
+            if (isUpper(array[j])) {
+                array[j] = toLowerCase(array[j]);
+            }
+            i++;
+            j--;
         }
-        // 투포인터 통과시 회문
+        
+        i = 0;
+        j = s.length()-1;
+        // 두 포인터가 만나면 탈출
+        
+        while (i < j) {
+            while (i<array.length&&!isAlphaNumeric(array[i])) {
+                i++;
+            }
+            while (i<array.length&&!isAlphaNumeric(array[j])) {
+                j--;
+            }
+            if(j<i){
+                return true;
+            }
+            if (array[i] != array[j]) {
+                return false;
+            }
+            i++;
+            j--;
+        }
         return true;
     }
     
-    public String trim(String s) {
-        StringBuilder sb = new StringBuilder();
-        for (int i=0;i<s.length();i++) {
-            // 대문자 확인 후 소문자로 변환
-            char c = s.charAt(i);
-            if (isUpper(c)) { 
-                c = toLowerCase(c);
-            }
-            // 숫자 또는 알파벳 소문자만
-            if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z')) {
-                sb.append(c);
-            }
+    public boolean isAlphaNumeric(char c) {
+        // 숫자 또는 알파벳 소문자만
+        if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z')) {
+            return true;
         }
-        return sb.toString();
+        return false;
     }
     
     public char toLowerCase(char c) {
