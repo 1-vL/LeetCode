@@ -20,7 +20,7 @@ class Solution {
         
         // 투포인터로 비교후 다른 경우 즉시 false 리턴
         for (int i=0;i<len/2;i++) {
-            if (s.charAt(i) != s.charAt(s.length()-1-i)) {
+            if (s.charAt(i) != s.charAt(len-1-i)) {
                return false; 
             }
         }
