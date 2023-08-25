@@ -1,7 +1,25 @@
 class Solution {
     public boolean isPalindrome(String s) {
         // 문자만 남기기
-        s = s.toLowerCase();
+        s = trim(s);
+        
+        // 빈 문자열인 경우 true
+        if (s.length() == 0) {
+            return true;
+        }
+        
+        // 투포인터로 비교후 다른 경우 즉시 false 리턴
+        for (int i=0;i<s.length()/2;i++) {
+            if (s.charAt(i) != s.charAt(s.length()-1-i)) {
+               return false; 
+            }
+        }
+        // 투포인터 통과시 회문
+        return true;
+    }
+    
+    public String trim(String s) {
+        s=s.toLowerCase();
         StringBuilder sb = new StringBuilder();
         for (int i=0;i<s.length();i++) {            
             char c = s.charAt(i);
@@ -10,21 +28,6 @@ class Solution {
                 sb.append(c);
             }
         }
-        s = sb.toString();
-        
-        int len = s.length();
-        // 빈 문자열인 경우 true
-        if (len == 0) {
-            return true;
-        }
-        
-        // 투포인터로 비교후 다른 경우 즉시 false 리턴
-        for (int i=0;i<len/2;i++) {
-            if (s.charAt(i) != s.charAt(len-1-i)) {
-               return false; 
-            }
-        }
-        // 투포인터 통과시 회문
-        return true;
+        return sb.toString();
     }
 }
