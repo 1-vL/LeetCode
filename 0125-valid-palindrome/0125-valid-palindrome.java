@@ -1,56 +1,41 @@
-class Solution{
-public  boolean isPalindrome(String s) {
-        // int i = 0, j = s.length() - 1;
-        // 0 9  A Z  a z
+
+class Solution {
+    public boolean isPalindrome(String s) {
+        // 문자만 남기기
+        s = trim(s);
         
-        char[] c = s.toCharArray();
-        int i = 0, j = c.length - 1;
-        // if(c.length==2){
-        //     return c[i]==c[j]?true:false;
-        // }
-        while (i <=j) {
-            if (upper(c[i])) {
-                c[i] = tolowercase(c[i]);
-            }
-            if (upper(c[j])) {
-                c[j] = tolowercase(c[j]);
-            }
-            i++;
-            j--;
+        // 빈 문자열인 경우 true
+        if (s.length() == 0) {
+            return true;
         }
-        // 2 -1
-        // System.out.println(Arrays.toString(c));
-        i = 0;
-        j = c.length - 1;
-        while (i < j) {
-            while (i<c.length&&!isalphanu(c[i])) {
-                i++;
+        
+        // 투포인터로 비교후 다른 경우 즉시 false 리턴
+        for (int i=0;i<s.length()/2;i++) {
+            if (s.charAt(i) != s.charAt(s.length()-1-i)) {
+               return false; 
             }
-            while (i<c.length&&!isalphanu(c[j])) {
-                j--;
-            }
-            if(j<i){
-                return true;
-            }
-            if (c[i] != c[j]) {
-                return false;
-            }
-            i++;
-            j--;
         }
+        // 투포인터 통과시 회문
         return true;
     }
-
-    public  char tolowercase(char c) {
-        return (char) (c + 32);
+    
+    public String trim(String s) {
+        StringBuilder sb = new StringBuilder();
+        for (int i=0;i<s.length();i++) {            
+            char c = s.charAt(i);
+            c = toLowerCase(c);
+            // 숫자 또는 알파벳 소문자만
+            if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z')) {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
     }
-
-    public  boolean isalphanu(char c) {
-        boolean b = (c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') ? true : false;
-        return b;
-    }
-
-    public  boolean upper(char c) {
-        return (c >= 'A' && c <= 'Z') ? true : false;
+    
+    public char toLowerCase(char c) {
+        if (c >= 'A' && c <= 'Z') {
+            c+=32;
+        }
+        return c;
     }
 }
