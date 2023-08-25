@@ -21,9 +21,12 @@ class Solution {
     
     public String trim(String s) {
         StringBuilder sb = new StringBuilder();
-        for (int i=0;i<s.length();i++) {            
+        for (int i=0;i<s.length();i++) {
+            // 대문자 확인 후 소문자로 변환
             char c = s.charAt(i);
-            c = toLowerCase(c);
+            if (isUpper(c)) { 
+                c = toLowerCase(c);
+            }
             // 숫자 또는 알파벳 소문자만
             if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z')) {
                 sb.append(c);
@@ -33,9 +36,12 @@ class Solution {
     }
     
     public char toLowerCase(char c) {
+        return (char) (c+32);
+    }
+    public boolean isUpper(char c) {        
         if (c >= 'A' && c <= 'Z') {
-            c+=32;
+            return true;
         }
-        return c;
+        return false;
     }
 }
