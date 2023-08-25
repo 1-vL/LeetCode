@@ -8,8 +8,6 @@ class Solution {
             return true;
         }
         
-        System.out.println(s);
-        
         // 투포인터로 비교후 다른 경우 즉시 false 리턴
         for (int i=0;i<s.length()/2;i++) {            
             System.out.println(s.charAt(i) + " " + s.charAt(s.length()-i-1));
