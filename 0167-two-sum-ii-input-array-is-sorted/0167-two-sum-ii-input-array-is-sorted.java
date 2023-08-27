@@ -3,7 +3,7 @@ class Solution {
         int min_idx = 0;
         int max_idx = numbers.length-1;
         
-        while(min_idx<max_idx) {
+        for (int i=0;min_idx<max_idx;i++) {
             int min = numbers[min_idx];
             int max = numbers[max_idx];
             if (min + max == target && (min_idx != max_idx)) {
