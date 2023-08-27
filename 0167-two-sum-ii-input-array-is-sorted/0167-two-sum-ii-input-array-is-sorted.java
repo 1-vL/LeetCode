@@ -6,7 +6,7 @@ class Solution {
         while (min_idx<max_idx) {
             int min = numbers[min_idx];
             int max = numbers[max_idx];
-            if (min + max == target && (min_idx != max_idx)) {
+            if (min + max == target) {
                 return new int[] {min_idx+1, max_idx+1};
             } else if (min + max < target) {
                 min_idx++;
