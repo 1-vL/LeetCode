@@ -3,8 +3,7 @@ class Solution {
         int min_idx = 0;
         int max_idx = numbers.length-1;
         
-        // 반드시 정답이 1개 존재한다고 조건을 제시해 줬기 때문에 성능을 위해 그냥 true로 설정
-        while (true) {
+        while (min_idx < max_idx) {
             int min = numbers[min_idx];
             int max = numbers[max_idx];
             if (min + max == target && (min_idx != max_idx)) {
@@ -15,5 +14,6 @@ class Solution {
                 max_idx--;
             }
         }
+        return new int[] {-1,-1};
     }
 }
