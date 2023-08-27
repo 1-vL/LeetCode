@@ -5,11 +5,13 @@ class Solution {
         
         // 반드시 정답이 1개 존재한다고 조건을 제시해 줬기 때문에 성능을 위해 그냥 true로 설정
         while (true) {
-            if (numbers[min_idx] + numbers[max_idx] == target) {
+            int min = numbers[min_idx];
+            int max = numbers[max_idx];
+            if (min + max == target) {
                 return new int[] {min_idx+1,max_idx+1};
-            } else if (numbers[min_idx] + numbers[max_idx] < target) {
+            } else if (min + max < target) {
                 min_idx++;
-            } else if (numbers[min_idx] + numbers[max_idx] > target) {
+            } else if (min + max > target) {
                 max_idx--;
             }
         }
