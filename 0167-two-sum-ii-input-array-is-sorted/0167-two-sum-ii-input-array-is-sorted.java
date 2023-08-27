@@ -10,7 +10,7 @@ class Solution {
                 return new int[] {min_idx+1, max_idx+1};
             } else if (min + max < target) {
                 min_idx++;
-            } else if (min + max > target) {
+            } else {
                 max_idx--;
             }
         }
