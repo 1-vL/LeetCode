@@ -5,7 +5,7 @@ class Solution {
             if ("+-*/".contains(tokens[i])) {
                 int e2 = s.pop();
                 int e1 = s.pop();
-                int ne=0;
+                int ne = 0;
                 if (tokens[i].equals("+")) {
                     ne = e1+e2;
                 } else if (tokens[i].equals("-")) {
