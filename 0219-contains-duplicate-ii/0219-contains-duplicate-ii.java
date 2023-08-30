@@ -8,9 +8,8 @@ class Solution {
         }
 
         for (int i=0;i<nums.length-k;i++) {
-            if (set.contains(nums[i+k])) return true;
+            if (!set.add(nums[i+k])) return true;
             set.remove(nums[i]);
-            set.add(nums[i+k]);
         }
         return false;
     }
