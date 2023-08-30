@@ -1,7 +1,6 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
         HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
-        map.put(nums[0],0);
         for (int i=0;i<nums.length;i++) {
             int num2 = target-nums[i]; // 현재 숫자 nums[i]와 합하여 target이 되는 숫자
             int num2_idx = map.getOrDefault(num2, -1); // num2의 인덱스값 (존재한다면 해당 인덱스, 존재하지 않는다면 -1 리턴)
