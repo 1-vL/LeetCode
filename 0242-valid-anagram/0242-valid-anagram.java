@@ -13,9 +13,7 @@ class Solution {
             // 사용한 후 음수값이 되면 즉시 false 리턴
         }
         // 사용하고 남은 알파벳이 있어도 false
-        for (int i=0;i<26;i++) {
-            if (alpha[i]!=0) return false;
-        }
+        for (int i : alpha) if (i != 0) return false;
         return true;
         
     }
