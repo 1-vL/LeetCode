@@ -18,7 +18,7 @@ class MinStack {
     }
     
     public int getMin() {
-        if (internal_stack.size()<1) return Integer.MAX_VALUE;
+        if (internal_stack.size()==0) return Integer.MAX_VALUE;
         return internal_stack.peek()[1];
     }
 }
