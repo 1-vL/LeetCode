@@ -1,26 +1,29 @@
 class Solution {
     public int evalRPN(String[] tokens) {
-        Stack<Integer> s = new Stack<Integer>();
-        for (int i=0;i<tokens.length;i++) {
-            // 토큰이 연산자라면 직전 2개 요소 꺼내서 연산
-            if ("+-*/".contains(tokens[i])) {
-                int e2 = s.pop(); // 더 가까운(스택에서 먼저 나오는) 요소가 / 연산시 분모로
-                int e1 = s.pop();
-                int ne = 0; // 연산 결과
-                if (tokens[i].equals("+")) {
-                    ne = e1+e2;
-                } else if (tokens[i].equals("-")) {
-                    ne = e1-e2;
-                } else if (tokens[i].equals("*")) {
-                    ne = e1*e2;
-                } else if (tokens[i].equals("/")) {
-                    ne = e1/e2;
-                }
-                s.push(ne);
-            } else {             
-                s.push(Integer.parseInt(tokens[i])); // 토큰이 연산자가 아니라면 정수로 스택에 삽입
+        Stack<Integer> st2 = new Stack<>();
+
+        for(String s : tokens){
+            if(s.equals("+") || s.equals("*") || s.equals("/") || s.equals("-")){
+                int b = st2.pop();
+                int a = st2.pop();
+                int res = cal(a, b, s.charAt(0));
+                st2.push(res);
+                
+            } else {
+                st2.push(Integer.parseInt(s));
             }
         }
-        return s.pop();
+        return st2.pop();
+    }
+    private int cal(int a, int b, char oprtr){
+        if(oprtr == '+'){
+            return a + b;
+        } else if(oprtr == '-'){
+            return a - b;
+        } else if(oprtr == '*'){
+            return a * b;
+        } else {
+            return a / b;
+        }
     }
 }
