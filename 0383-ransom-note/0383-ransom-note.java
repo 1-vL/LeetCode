@@ -1,18 +1,14 @@
 class Solution {
     public boolean canConstruct(String ransomNote, String magazine) {
-        int[] alpha = new int[26];
-        char[] mg = magazine.toCharArray();
-        char[] rn = ransomNote.toCharArray();
+		if (ransomNote.length() > magazine.length()) return false;
+        int[] alphabets_counter = new int[26];
         
-        // magazine의 알파벳 집계
-        for (int i=0;i<mg.length;i++) {
-            alpha[mg[i] - 'a']++;
-        }
+        for (char c : magazine.toCharArray())
+            alphabets_counter[c-'a']++;
 
-        // ransomNote 만드는데 사용한 경우 제거
-        for (int i=0;i<rn.length;i++) {
-            if (--alpha[rn[i] - 'a'] < 0) return false;
-            // 사용한 후 음수값이 되면 즉시 false 리턴
+        for (char c : ransomNote.toCharArray()){
+            if (alphabets_counter[c-'a'] == 0) return false;
+            alphabets_counter[c-'a']--;
         }
         return true;
     }
