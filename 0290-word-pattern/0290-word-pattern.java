@@ -16,7 +16,6 @@ class Solution {
 
         String[] words = new String[pattern.length()]; // 입력받은 단어들
         String[] alphaWord = new String[26];
-        char[] wordAlpha = new char[26];
         
         for (int i=0;i<words.length;i++) {
             words[i] = st.nextToken();
