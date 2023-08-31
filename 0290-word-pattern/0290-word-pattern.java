@@ -23,11 +23,12 @@ class Solution {
                 alphaWord[pattern.charAt(i)-'a'] = words[i];
             }
             if (words[i].equals(alphaWord[pattern.charAt(i)-'a']) && map.getOrDefault(words[i], pattern.charAt(i)) == pattern.charAt(i)) {
-                // 알파벳 1글자가 하나의 단어만을 가리키는지 체크
-                // 한 단어가 알파벳 한 글자만을 가리키는지 체크해야함
+                // 알파벳 1글자가 하나의 단어만을 가리키는지 체크하고
+                // 반대로 한 단어가 알파벳 한 글자만을 가리키는지도 체크해야함
                 alphaWord[pattern.charAt(i)-'a'] = words[i];
                 map.put(words[i],pattern.charAt(i));
             } else {
+                // 둘 중에 하나라도 다르다면 즉시 false 리턴
                 return false;
             }            
         }
