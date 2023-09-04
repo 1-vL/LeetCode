@@ -1,73 +1,55 @@
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
-class Solution {
-    public ListNode sortList(ListNode head) {        
-        // 전체 요소 저장용
-        ArrayList<ListNode> list = new ArrayList<>();
-        // 시작 노드
-        ListNode next = head;
-        // [] 빈 노드 받는 경우 예외처리
-        if (head==null || head.next == null) { return head; }
-        // Node 순회하며 list에 추가
-        while (next != null) {
-            list.add(next);            
-            next = next.next;
+public class Solution {
+    
+    //merge two sorted list, return result head
+    public ListNode merge(ListNode h1, ListNode h2){
+        if(h1 == null){
+            return h2;
         }
-
-        // 정렬용 배열
-        ListNode[] result = new ListNode[list.size()];
-        // 배열로 값 복사
-        for (int i=0;i<list.size();i++) {
-           result[i] = list.get(i);
+        if(h2 == null){
+            return h1;
         }
-
-        //정렬(재귀) 호출
-        sort(result, 0, result.length-1);
-
-        // 정렬 결과 Node에 반영
-        for (int i=0;i<result.length-1;i++) {
-           result[i].next = result[i+1];
+        
+        if(h1.val < h2.val){
+            h1.next = merge(h1.next, h2);
+            return h1;
         }
-        result[result.length-1].next=null;
-
-        return result[0];
+        else{
+            h2.next = merge(h1, h2.next);
+            return h2;
+        }
+        
     }
-
-    public void sort(ListNode[] array, int start, int end) {
-        // 정렬 범위
-        if (start < end) {
-            int half = (end+start)/2;
-            
-            sort(array,start,half); // 절반씩 정렬
-            sort(array,half+1,end); // 머지 정렬
-            merge(array,start,half,end); // 정렬된 배열 2개 병합
+    
+    public ListNode sortList(ListNode head) {
+        //bottom case
+        if(head == null){
+            return head;
         }
-    }
-
-    public void merge(ListNode[] array, int start, int half, int end) {
-        int i = start, j = half+1, k = start;
-        ListNode[] tmp = new ListNode[array.length];
-
-        while(i<=half && j<=end) { // 두 배열 모두 범위 체크
-            // 좌측 배열 값이 더 작으면
-            if(array[i].val <= array[j].val) {
-                tmp[k++] = array[i++]; // 임시배열에 좌측 값 복사
-            }
-            else tmp[k++] = array[j++]; // 임시배열에 우측 값 복사
+        if(head.next == null){
+            return head;
         }
-        // 좌측 배열에 아직 복사할 값이 남은 경우 복사
-        while(i<=half) tmp[k++] = array[i++];
-        // 우측 배열에 아직 복사할 값이 남은 경우 복사
-        while(j<=end) tmp[k++] = array[j++];
-        // 임시 배열에 있던 값 가져오기
-        for(int a = start; a<=end; a++) array[a] = tmp[a];
+        
+        //p1 move 1 step every time, p2 move 2 step every time, pre record node before p1
+        ListNode p1 = head;
+        ListNode p2 = head;
+        ListNode pre = head;
+        // 2칸씩 전진하는 포인터와 1칸씩 전진하는 포인터로 나눠 절반 지점을 찾는 건 천재적인 것 같다.
+        
+        while(p2 != null && p2.next != null){
+            pre = p1;
+            p1 = p1.next;
+            p2 = p2.next.next;
+        }
+        //change pre next to null, make two sub list(head to pre, p1 to p2)
+        pre.next = null;
+        // 절단 지점에서 끊기
+        
+        //handle those two sub list
+        ListNode h1 = sortList(head);
+        ListNode h2 = sortList(p1);
+        
+        return merge(h1, h2);
+        
     }
+    
 }
