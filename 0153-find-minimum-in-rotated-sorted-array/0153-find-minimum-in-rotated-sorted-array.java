@@ -1,24 +1,23 @@
-class Solution {
-    public int findMin(int[] nums) {
-        int lo=0, hi=nums.length-1;
-        // 한바퀴 돌아서 원래대로 전체 배열이 오름차순인 경우 즉시 0번째 요소 리턴
-        if (nums[lo]<=nums[hi]) { return nums[lo]; }
-
-        while (lo < hi) {
-            int m = (hi+lo)/2;
-            // 현재 구간이 오름차순인 경우
-            if (nums[lo]<=nums[m] && nums[m]<=nums[hi]) {
-                return nums[lo];
-            } else { // 오름차순이 아니라면
-                // 왼쪽부터 중간까지는 오름차순이었던 경우
-                // -> 우측 어딘가에서 최소값 시작
-                if (nums[lo]<=nums[m]) {
-                    lo=m+1;
-                } else {
-                    hi=m;
-                }
+public class Solution {
+    public int findMin(int[] num) {
+        if (num == null || num.length == 0) {
+            return 0;
+        }
+        if (num.length == 1) {
+            return num[0];
+        }
+        int start = 0, end = num.length - 1;
+        while (start < end) {
+            int mid = (start + end) / 2;
+            if (mid > 0 && num[mid] < num[mid - 1]) {
+                return num[mid];
+            }
+            if (num[start] <= num[mid] && num[mid] > num[end]) {
+                start = mid + 1;
+            } else {
+                end = mid - 1;
             }
         }
-        return nums[lo];
+        return num[start];
     }
 }
