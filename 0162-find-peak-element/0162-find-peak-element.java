@@ -1,19 +1,32 @@
 class Solution {
-    public int findPeakElement(int[] nums) {
-        int start = 0, end = nums.length-1, mid = 0;
-        // 1개짜리 배열이면 즉시 리턴
-        if (nums.length == 1) { return 0; }
+    public int findPeakElement(int[] num) {    
+        return helper(num,0,num.length-1);
+    }
 
-        // 이진 탐색 시 mid 위치의 값을 기준으로 Peak 가능성 체크 후 가능한 쪽 탐색
-        while (start < end) {
-            mid = (start + end) / 2; // 중간 위치
-            if (nums[mid]<nums[mid+1]) { // 중간이 자기 옆 칸보다 작다면 -> 중간은 피크 가능성 없음
-                start = mid+1; // 범위 시작을 중간 옆칸으로
-            } else { // 중간이 자기 옆칸 이상이라면
-                end = mid; // 끝을 중간 자리로
+    public int helper(int[] num,int start,int end){
+        if(start == end){
+            return start;
+        }else if(start+1 == end){
+            if(num[start] > num[end]) return start;
+            return end;
+        }else{
+            
+            int m = (start+end)/2;
+            
+            if(num[m] > num[m-1] && num[m] > num[m+1]){
+
+                return m;
+
+            }else if(num[m-1] > num[m] && num[m] > num[m+1]){
+
+                return helper(num,start,m-1);
+
+            }else{
+
+                return helper(num,m+1,end);
+
             }
-        } 
-        // 탈출 시점에서 start >= end
-        return end;
+            
+        }
     }
 }
