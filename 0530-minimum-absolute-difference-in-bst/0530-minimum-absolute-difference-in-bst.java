@@ -17,7 +17,7 @@ class Solution {
     public int getMinimumDifference(TreeNode root) {
         int min = Integer.MAX_VALUE;
         Queue<TreeNode> q = new LinkedList<TreeNode>();
-        LinkedList<Integer> list = new LinkedList<Integer>();
+        ArrayList<Integer> list = new ArrayList<Integer>();
         q.offer(root);
         while (!q.isEmpty()) {
             TreeNode now = q.poll();
