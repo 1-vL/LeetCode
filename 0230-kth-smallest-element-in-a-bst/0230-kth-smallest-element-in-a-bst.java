@@ -9,7 +9,7 @@ class Solution {
     }
 
     public void inOrder(TreeNode node) {
-        if (node == null) { return; }
+        if (node == null || cnt > kcnt) { return; }
         inOrder(node.left);
         if (cnt==kcnt) { answer=node.val; }
         cnt++;
