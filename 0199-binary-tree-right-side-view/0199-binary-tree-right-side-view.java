@@ -19,9 +19,10 @@ class Solution {
             }
             if (level_pushed==level_polled) { // 한 높이의 마지막 요소
                 answer.add(now.val);
+                // 높이 초기화
                 level_pushed = q.size();
                 level_polled = 0;
-            } // 높이 초기화
+            }
         }
         return answer;
     }
