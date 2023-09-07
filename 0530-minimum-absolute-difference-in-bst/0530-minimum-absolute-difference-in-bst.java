@@ -25,13 +25,10 @@ class Solution {
 
             if (now.left != null) {
                 q.offer(now.left);
-                min = Math.min(min, now.val-now.left.val);
             }      
             if (now.right != null) {
                 q.offer(now.right);
-                min = Math.min(min, now.right.val-now.val);
             }
-            if (min==1) return 1;
         }
         Integer[] array = list.toArray(new Integer[0]);
         Arrays.sort(array);
