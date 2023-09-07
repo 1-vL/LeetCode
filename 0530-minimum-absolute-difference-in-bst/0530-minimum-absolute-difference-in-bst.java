@@ -1,41 +1,25 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
 class Solution {
+    static int min;
+    static int before_val;
     public int getMinimumDifference(TreeNode root) {
-        int min = Integer.MAX_VALUE;
-        Queue<TreeNode> q = new LinkedList<TreeNode>();
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        q.offer(root);
-        while (!q.isEmpty()) {
-            TreeNode now = q.poll();
-            list.add(now.val);
-
-            if (now.left != null) {
-                q.offer(now.left);
-            }      
-            if (now.right != null) {
-                q.offer(now.right);
-            }
-        }
-        Integer[] array = list.toArray(new Integer[0]);
-        Arrays.sort(array);
-        for (int i=0; i<array.length-1; i++) {
-                min = Math.min(min, array[i+1]-array[i]);
-                if (min==1) return 1;
-        }
+        // static 변수 초기화
+        before_val=-1;
+        min  = Integer.MAX_VALUE;
+        Inorder(root); // 루트노드 중위순회
         return min;
+    }
+        
+    
+    void Inorder(TreeNode node) {
+        if(node == null) { return; } // 리프노드
+        Inorder(node.left); // 왼쪽 재귀
+        // 이전 값이 존재하면
+        if (before_val>=0) {
+            // 오름차순 순회이므로 현재값에서 이전값을 뺀 값(차이)가 min보다 작은지 체크
+            min = Math.min(min, node.val-before_val);
+        }
+        System.out.println(node.val + " " + before_val);
+        before_val = node.val;
+        Inorder(node.right); // 오른쪽 재귀
     }
 }
