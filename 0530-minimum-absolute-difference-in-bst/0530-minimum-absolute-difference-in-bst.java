@@ -33,7 +33,7 @@ class Solution {
         Integer[] array = list.toArray(new Integer[0]);
         Arrays.sort(array);
         for (int i=0; i<array.length-1; i++) {
-                min = Math.min(min, Math.abs(array[i+1]-array[i]));
+                min = Math.min(min, array[i+1]-array[i]);
         }
         return min;
     }
