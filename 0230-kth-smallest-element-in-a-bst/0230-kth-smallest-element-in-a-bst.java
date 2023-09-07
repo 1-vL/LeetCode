@@ -12,7 +12,7 @@ class Solution {
         if (node == null || cnt > kcnt) { return; }
         inOrder(node.left);
         cnt++;
-        if (cnt==kcnt) { answer=node.val; }
+        if (cnt==kcnt) { answer=node.val; return; }
         inOrder(node.right);
     }
 }
