@@ -1,18 +1,19 @@
 class Solution {
-    int cnt=0;
-    int kcnt;
-    int answer;
+    public static int ans = 0;
     public int kthSmallest(TreeNode root, int k) {
-        kcnt = k;
-        inOrder(root);
-        return answer;
+        helper(root, k);
+        return ans;
     }
 
-    public void inOrder(TreeNode node) {
-        if (node == null || cnt > kcnt) { return; }
-        inOrder(node.left);
-        cnt++;
-        if (cnt==kcnt) { answer=node.val; return; }
-        inOrder(node.right);
+    public int helper(TreeNode root, int k) {
+        if (root == null) {
+            return 0;
+        }
+        int leftCount = helper(root.left, k);
+        int rightCount = helper(root.right, k - leftCount - 1);
+        if (k == leftCount + 1) {
+            ans = root.val;
+        }
+        return leftCount + rightCount + 1;
     }
 }
