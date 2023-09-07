@@ -17,7 +17,6 @@ class Solution {
             if (now.right!=null) {
                 q.offer(now.right);
             }
-            // System.out.println(level_polled + "/" + level_pushed + " val: " + now.val);
             if (level_pushed==level_polled) { // 한 높이의 마지막 요소
                 answer.add(now.val);
                 level_pushed = q.size();
