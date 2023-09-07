@@ -3,6 +3,7 @@ class Solution {
         List<Integer> answer = new ArrayList<Integer>();
         Queue<TreeNode> q = new ArrayDeque<TreeNode>();
         int level_pushed = 1; // root 요소 1개
+        int next_level = 0;
 
         if (root == null) { return answer; }
 
@@ -13,14 +14,17 @@ class Solution {
 
             if (now.left!=null) {
                 q.offer(now.left);
+                next_level++;
             }
             if (now.right!=null) {
                 q.offer(now.right);
+                next_level++;
             }
             if (level_pushed==0) { // 한 높이의 마지막 요소
                 answer.add(now.val);
                 // 높이 초기화
-                level_pushed = q.size();
+                level_pushed = next_level;
+                next_level = 0;
             }
         }
         return answer;
