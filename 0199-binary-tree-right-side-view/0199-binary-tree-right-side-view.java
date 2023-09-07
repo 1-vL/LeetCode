@@ -1,7 +1,7 @@
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> answer = new ArrayList<>();
-        Queue<TreeNode> q = new LinkedList<>();
+        Queue<TreeNode> q = new ArrayDeque<>();
         int level_pushed = 1; // root 요소 1개
 
         if (root == null) { return answer; }
