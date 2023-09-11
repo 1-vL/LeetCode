@@ -1,15 +1,13 @@
 class Trie {
 
     Node head;
-    Node dummy = new Node(' '); // Dummy Head용 빈 노드.(들어올 자료들은 모두 영문 소문자만 들어온다.)
+    Node dummy = new Node(); // Dummy Head용 빈 노드
 
     class Node { // Node 클래스
-        char val; // 값(생략 가능)
         HashMap<Character, Node> children;
         boolean end = false;
 
-        Node(char val) {
-            this.val = val;
+        Node() {
             this.children = new HashMap<Character, Node>();
             this.end = false;
         }
@@ -32,7 +30,7 @@ class Trie {
                 next = next.get(now).children; // 다음 노드들 현재 노드의 children으로 변경
             } else {
                 // 아직 이 문자의 노드가 없다면
-                Node input = new Node(now); // 추가할 노드
+                Node input = new Node(); // 추가할 노드
                 if (i==word.length()-1) { input.end = true; } // 마지막 문자라면 end = true;
                 next.put(now, input); // 추가
                 next = next.get(now).children; // 다음 노드들 현재 추가한 노드의 children으로 변경
