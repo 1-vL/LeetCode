@@ -1,51 +1,62 @@
 class WordDictionary {
-    Node head;
-    Node dummy = new Node();
-
-    class Node {
-        Node[] children;
-        boolean end;
-
-        Node() {
-            this.children = new Node[26];
-            this.end = false;
-        }
+    public class TrieNode {
+        public TrieNode[] children = new TrieNode[26];
+        public boolean isWord = false;
     }
+    
+    public TrieNode root = new TrieNode();
 
+    /** Initialize your data structure here. */
     public WordDictionary() {
-        head = dummy;        
+        
     }
     
+    /** Adds a word into the data structure. */
     public void addWord(String word) {
-        Node next = head;
-        for (int i=0;i<word.length();i++) {
-            int pos = word.charAt(i)-'a';
-            if (next.children[pos] == null) {
-                next.children[pos] = new Node();
+        TrieNode node = root;
+        for (char c : word.toCharArray()) {
+            if (node.children[c - 'a'] == null) {
+                node.children[c - 'a'] = new TrieNode();
             }
-            next = next.children[pos];
+            node = node.children[c - 'a'];
         }
-        next.end = true;
-    }
-
-    public boolean search(String word) {
-        return searchDFS(word, 0, head);
+        node.isWord = true;
     }
     
-    public boolean searchDFS(String word, int index, Node next) {
-        if (index == word.length()) { return next.end; }            
-        char now = word.charAt(index);
-        if (now == '.') { // 와일드 카드라면
-            for (int i=0;i<26;i++) { // 소문자 26개
-                // 리프 노드가 아니고 && 다음 노드 재귀로 검색한 결과가 false 가 아니라면
-                if (next.children[i] != null && searchDFS(word, index+1, next.children[i])) {
-                    return true;
+    /** Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter. */
+    public boolean search(String word) {
+        TrieNode node = root;
+        Queue<TrieNode> queue = new LinkedList<>();
+        queue.offer(node);
+        int level = 0;
+        while (!queue.isEmpty() && level <= word.length()) {
+            int size = queue.size();
+
+            for (int i = 0; i < size; i++) {
+                TrieNode current = queue.poll();
+                
+                if (level == word.length()) {
+                    if (current.isWord) {
+                        return true;
+                    } else {
+                        continue;
+                    }
+                }
+                
+                char c = word.charAt(level);
+                
+                if (c == '.') {
+                    for (TrieNode t : current.children) {
+                        if (t != null) {
+                            queue.offer(t);
+                        }
+                    }
+                } else if (current.children[c - 'a'] != null) {
+                    queue.offer(current.children[c - 'a']);
                 }
             }
-            return false; // 모든 알파벳을 체크했는데 true가 없으면 false
-        } else { // 와일드 카드가 아니라면
-            if (next.children[now-'a'] == null) { return false; } // 이 문자가 없으면 false
-            return searchDFS(word, index+1, next.children[now-'a']); // 이 문자가 있으면 재귀 호출
+            level++;
         }
+        return false;
     }
 }
