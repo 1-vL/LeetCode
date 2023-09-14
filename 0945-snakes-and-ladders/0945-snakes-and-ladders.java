@@ -41,10 +41,8 @@ class Solution {
             for (int i=cur+1; i<=dice_move; i++) {
                 if (oneDimension[i] != -1) {                
                     // 뱀 또는 사다리
-                    // System.out.println("워프: " + cur + " -> " + i + " -> " + oneDimension[i] + " 횟수 " + (move_cnt+1));
                     q.offer(new Integer[] {oneDimension[i], move_cnt+1});
                 } else {
-                    // System.out.println("일반이동: " + cur + " -> " + i + " 횟수 " + (move_cnt+1));
                     q.offer(new Integer[] {i, move_cnt+1});
                 }
             }
