@@ -30,8 +30,7 @@ class Solution {
             if (visited[cur]) {
                 continue;
             }
-
-            int now = oneDimension[cur];
+            
             visited[cur] = true;
 
             if (cur == size) {
