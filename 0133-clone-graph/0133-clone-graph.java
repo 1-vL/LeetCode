@@ -1,57 +1,36 @@
-/*
-// Definition for a Node.
-class Node {
-    public int val;
-    public List<Node> neighbors;
-    public Node() {
-        val = 0;
-        neighbors = new ArrayList<Node>();
-    }
-    public Node(int _val) {
-        val = _val;
-        neighbors = new ArrayList<Node>();
-    }
-    public Node(int _val, ArrayList<Node> _neighbors) {
-        val = _val;
-        neighbors = _neighbors;
-    }
-}
-*/
-
 class Solution {
     public Node cloneGraph(Node node) {
         if (node == null) { return node; }
         if (node.neighbors.isEmpty()) { return copyOf(node); }
 
-        List<Node> visited = new ArrayList<Node>();
-        List<Node> newNodes = new ArrayList<Node>();
+        Node[] visited = new Node[101];
         Queue<Node> q = new ArrayDeque<Node>();
         Node startNode = node;
         q.offer(node);
         while (!q.isEmpty()) {
             Node vertex = q.poll();
-            if (!visited.contains(vertex)) {
+            if (visited[vertex.val] == null) {
                 for (Node adj : vertex.neighbors) {
                     q.offer(adj);
                 }
-                visited.add(vertex);
+                visited[vertex.val] = vertex;
             }
         }
         for (Node n : visited) {
-            newNodes.add(copyOf(n));
+            if (n != null) {
+                visited[n.val] = copyOf(n);
+            }            
         }
-        for (Node n : newNodes) {
+        for (Node n : visited) {
+            if (n == null) {
+                continue;
+            }            
             if (n.val == 1) {
                 startNode = n;
             }
             List<Node> newAdjs = new ArrayList<Node>();
             for (Node adj : n.neighbors) {
-                for (Node n2 : newNodes) {
-                    if (adj.val==n2.val) {
-                        newAdjs.add(n2);
-                        break;
-                    }
-                }
+                newAdjs.add(visited[adj.val]);
             }
             n.neighbors = newAdjs;
         }
