@@ -1,8 +1,9 @@
 class Solution {
     public int snakesAndLadders(int[][] board) {
         int n = board.length;
-        int[] oneDimension = new int[n*n+1];
-        boolean[] visited = new boolean[n*n+1];
+        int size=n*n;
+        int[] oneDimension = new int[size+1];
+        boolean[] visited = new boolean[size+1];
         int cnt = 1;
         // 1차원 배열로 변환
         for (int i=n-1; i>=0; i--) {
@@ -33,10 +34,10 @@ class Solution {
             int now = oneDimension[cur];
             visited[cur] = true;
 
-            if (cur == oneDimension.length-1) {
+            if (cur == size) {
                 return move_cnt;
             }
-            int dice_move = Math.min(oneDimension.length-1, cur+6);
+            int dice_move = Math.min(size, cur+6);
             
             for (int i=cur+1; i<=dice_move; i++) {
                 if (oneDimension[i] != -1) {                
