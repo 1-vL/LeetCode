@@ -23,8 +23,8 @@ class Solution {
         if (node == null) { return node; }
         if (node.neighbors.isEmpty()) { return copyOf(node); }
 
-        ArrayList<Node> visited = new ArrayList<Node>();
-        ArrayList<Node> newNodes = new ArrayList<Node>();
+        List<Node> visited = new ArrayList<Node>();
+        List<Node> newNodes = new ArrayList<Node>();
         Queue<Node> q = new ArrayDeque<Node>();
         Node startNode = node;
         q.offer(node);
