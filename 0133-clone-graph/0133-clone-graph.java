@@ -21,11 +21,12 @@ class Solution {
                 visited[n.val] = copyOf(n);
             }            
         }
-        for (Node n : visited) {
+        for (int i=1; i<101; i++) {
+            Node n = visited[i];
             if (n == null) {
                 continue;
             }            
-            if (n.val == 1) {
+            if (i == 1) {
                 startNode = n;
             }
             List<Node> newAdjs = new ArrayList<Node>();
@@ -41,6 +42,5 @@ class Solution {
         Node result = new Node(origin.val);
         result.neighbors.addAll(origin.neighbors);
         return result;
-        // return new Node(origin.val, new ArrayList().addAll(origin.neighbors));
     }
 }
