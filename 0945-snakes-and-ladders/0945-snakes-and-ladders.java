@@ -20,11 +20,11 @@ class Solution {
             }
         }
 
-        Queue<Integer[]> q = new ArrayDeque<Integer[]>();
-        q.offer(new Integer[] {1,0});
+        Queue<int[]> q = new ArrayDeque<int[]>();
+        q.offer(new int[] {1,0});
 
         while (!q.isEmpty()) {
-            Integer[] before = q.poll();
+            int[] before = q.poll();
             int cur = before[0];
             int move_cnt = before[1];            
             if (visited[cur]) {
@@ -40,9 +40,9 @@ class Solution {
             for (int i=cur+1; i<=dice_move; i++) {
                 if (oneDimension[i] != -1) {                
                     // 뱀 또는 사다리
-                    q.offer(new Integer[] {oneDimension[i], move_cnt+1});
+                    q.offer(new int[] {oneDimension[i], move_cnt+1});
                 } else {
-                    q.offer(new Integer[] {i, move_cnt+1});
+                    q.offer(new int[] {i, move_cnt+1});
                 }
             }
         }
