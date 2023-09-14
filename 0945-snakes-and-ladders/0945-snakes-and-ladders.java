@@ -30,12 +30,11 @@ class Solution {
             if (visited[cur]) {
                 continue;
             }
-            
-            visited[cur] = true;
-
             if (cur == size) {
                 return move_cnt;
             }
+            visited[cur] = true;
+
             int dice_move = Math.min(size, cur+6);
             
             for (int i=cur+1; i<=dice_move; i++) {
