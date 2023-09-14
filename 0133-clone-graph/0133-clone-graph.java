@@ -49,6 +49,7 @@ class Solution {
                 for (Node n2 : newNodes) {
                     if (adj.val==n2.val) {
                         newAdjs.add(n2);
+                        break;
                     }
                 }
             }
